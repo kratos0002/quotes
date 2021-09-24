@@ -87,11 +87,27 @@ telegram_bot_token = "2024333055:AAHM_Pz9C8UOC316pMejalR6mWHcNfapa8o"
 def random1(update, context):
     # fetch data from the api
     x = url()
+    chat_ids = get_chat_id(update, context)
     number = random.randint(0, len(x)-1)
     quote=x[number]
     print(quote)
     # send message
-    context.bot.send_message(chat_id=update.effective_chat.id, text=quote) 
+    context.bot.send_message(chat_id=chat_ids, text=quote) 
+
+def get_chat_id(update, context):
+  chat_id = -1
+
+  if update.message is not None:
+    # from a text message
+    chat_id = update.message.chat.id
+  elif update.callback_query is not None:
+    # from a callback message
+    chat_id = update.callback_query.message.chat.id
+
+    return chat_id
+
+    
+
 
 # def life(update, context):
 #     # fetch data from the api
@@ -104,12 +120,16 @@ def random1(update, context):
 # # quotes_handler = CommandHandler('random', random)
 # # dispatcher.add_handler(quotes_handler)
 
+# def error(update, context):
+#     context.bot.send_message('an error occured')
 
 def main():
     updater = Updater(telegram_bot_token)
     dp = updater.dispatcher
     dp.add_handler(CommandHandler('random',random1))
     # dp.add_handler(CommandHandler('life',life))
+    # dp.add_handler(MessageHandler(Filters.text, text))
+    # dp.add_error_handler(error)
     updater.start_polling()
     updater.idle()
 
