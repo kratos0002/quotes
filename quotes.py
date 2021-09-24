@@ -47,8 +47,9 @@ def extractquote(soup):
 
 
 def url():
-    tags = ['life', 'death', 'love', 'hate', 'america', 'kerouac', 'ontheroad', 'dharma', 'truth','harrypotter','batman','justice']
-    number = random.randint(1,len(tags))
+    tags = ['life', 'death', 'love', 'hate', 'america', 'kerouac', 'ontheroad', 'dharma', 'truth','harrypotter','batman', 'justice']
+    number = random.randint(0,len(tags)-1)
+    print(number)
     url = geturl(tags[number])
     soup = get_soup(url)
     quote_element = extract_quotes_elements_from_soup(soup)
@@ -58,15 +59,15 @@ def url():
     y=list(x.items())
     return y
 
-def urlwitharg(arg):
-    url = geturl(arg)
-    soup = get_soup(url)
-    quote_element = extract_quotes_elements_from_soup(soup)
-    print(type(quote_element))
-    print(type(soup))
-    x= extractquote(soup)
-    y=list(x.items())
-    return y
+# def urlwitharg(arg):
+#     url = geturl(arg)
+#     soup = get_soup(url)
+#     quote_element = extract_quotes_elements_from_soup(soup)
+#     print(type(quote_element))
+#     print(type(soup))
+#     x= extractquote(soup)
+#     y=list(x.items())
+#     return y
 
 
 
@@ -86,29 +87,29 @@ telegram_bot_token = "2024333055:AAHM_Pz9C8UOC316pMejalR6mWHcNfapa8o"
 def random1(update, context):
     # fetch data from the api
     x = url()
-    number = random.randint(1, len(x))
-    print(number)
-    quote=x[number]
-    # send message
-    context.bot.send_message(chat_id=751449651, text=quote) 
-
-def life(update, context):
-    # fetch data from the api
-    x = urlwitharg("life")
-    number = random.randint(1, len(x))
+    number = random.randint(0, len(x)-1)
     quote=x[number]
     print(quote)
     # send message
-    context.bot.send_message(chat_id=751449651, text=quote) 
-# quotes_handler = CommandHandler('random', random)
-# dispatcher.add_handler(quotes_handler)
+    context.bot.send_message(chat_id=update.effective_chat.id, text=quote) 
+
+# def life(update, context):
+#     # fetch data from the api
+#     x = urlwitharg("life")
+#     number = random.randint(1, len(x))
+#     quote=x[number]
+#     print(quote)
+#     # send message
+#     context.bot.send_message(chat_id=update.effective_chat.id, text=quote) 
+# # quotes_handler = CommandHandler('random', random)
+# # dispatcher.add_handler(quotes_handler)
 
 
 def main():
     updater = Updater(telegram_bot_token)
     dp = updater.dispatcher
     dp.add_handler(CommandHandler('random',random1))
-    dp.add_handler(CommandHandler('life',life))
+    # dp.add_handler(CommandHandler('life',life))
     updater.start_polling()
     updater.idle()
 
