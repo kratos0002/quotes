@@ -59,6 +59,7 @@ def url():
     y=list(x.items())
     return y
 
+<<<<<<< HEAD
 def urlwitharg(arg):
     url = geturl(arg)
     soup = get_soup(url)
@@ -68,6 +69,17 @@ def urlwitharg(arg):
     x= extractquote(soup)
     y=list(x.items())
     return y
+=======
+# def urlwitharg(arg):
+#     url = geturl(arg)
+#     soup = get_soup(url)
+#     quote_element = extract_quotes_elements_from_soup(soup)
+#     print(type(quote_element))
+#     print(type(soup))
+#     x= extractquote(soup)
+#     y=list(x.items())
+#     return y
+>>>>>>> 3e0fb57f80371cd707c1c81ab8c4c5acb7035ac3
 
 
 
@@ -87,11 +99,15 @@ telegram_bot_token = "2024333055:AAHM_Pz9C8UOC316pMejalR6mWHcNfapa8o"
 def random1(update, context):
     # fetch data from the api
     x = url()
+<<<<<<< HEAD
     chat_ids = get_chat_id(update, context)
+=======
+>>>>>>> 3e0fb57f80371cd707c1c81ab8c4c5acb7035ac3
     number = random.randint(0, len(x)-1)
     quote=x[number]
     print(quote)
     # send message
+<<<<<<< HEAD
     context.bot.send_message(chat_id=chat_ids, text=quote) 
 
 def get_chat_id(update, context):
@@ -108,6 +124,9 @@ def get_chat_id(update, context):
 
     
 
+=======
+    context.bot.send_message(chat_id=update.effective_chat.id, text=quote) 
+>>>>>>> 3e0fb57f80371cd707c1c81ab8c4c5acb7035ac3
 
 # def life(update, context):
 #     # fetch data from the api
@@ -120,18 +139,28 @@ def get_chat_id(update, context):
 # # quotes_handler = CommandHandler('random', random)
 # # dispatcher.add_handler(quotes_handler)
 
+<<<<<<< HEAD
 # def error(update, context):
 #     context.bot.send_message('an error occured')
+=======
+>>>>>>> 3e0fb57f80371cd707c1c81ab8c4c5acb7035ac3
 
 def main():
     updater = Updater(telegram_bot_token)
     dp = updater.dispatcher
     dp.add_handler(CommandHandler('random',random1))
     # dp.add_handler(CommandHandler('life',life))
+<<<<<<< HEAD
     # dp.add_handler(MessageHandler(Filters.text, text))
     # dp.add_error_handler(error)
+=======
+>>>>>>> 3e0fb57f80371cd707c1c81ab8c4c5acb7035ac3
     updater.start_polling()
     updater.idle()
 
 if __name__ == '__main__':
+<<<<<<< HEAD
     main()
+=======
+    main()
+>>>>>>> 3e0fb57f80371cd707c1c81ab8c4c5acb7035ac3
